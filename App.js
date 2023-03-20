@@ -5,7 +5,7 @@ import Login from './Components/Login/Login'
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Welcome to PMS school</Text>
+      <Text>Welcome to Our School</Text>
       <Text>Please Sign in First</Text>
       <Login />
       <StatusBar style="auto" />
