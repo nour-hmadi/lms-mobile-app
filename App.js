@@ -1,15 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet} from 'react-native';
+import RecordAttendance from './Components/Attendance/RecordAttendance';
 import Login from './Components/Login/Login'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useState, useEffect } from "react";
+import Topbar from './Components/Topbar/Topbar';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    window.localStorage.getItem("loggedIn")
+  );
+
+  useEffect(() => {
+    setIsLoggedIn(window.localStorage.getItem("loggedIn"));
+  }, []);
   return (
-    <View style={styles.container}>
-      <Text>Welcome to PMS school</Text>
-      <Text>Please Sign in First</Text>
-      <Login />
-      <StatusBar style="auto" />
-    </View>
+       <NavigationContainer>
+      <Stack.Navigator>
+        {isLoggedIn ? (
+          <Stack.Screen name="RecordAttendance" component={RecordAttendance} />
+        ) : (
+          <Stack.Screen name="Login" component={Login} />
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>   
   );
 }
 
