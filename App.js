@@ -14,15 +14,7 @@ export default function App() {
   useEffect(() => {
     setIsLoggedIn(window.localStorage.getItem("loggedIn"));
   }, []);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // useEffect(() => {
-  //   async function checkLoggedIn() {
-  //     const loggedIn = await AsyncStorage.getItem('loggedIn');
-  //     setIsLoggedIn(loggedIn === 'true');
-  //   }
-  //   checkLoggedIn();
-  // }, []);
   return (
        <NavigationContainer>
       <Stack.Navigator>
