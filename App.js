@@ -4,8 +4,6 @@ import Login from './Components/Login/Login'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState, useEffect } from "react";
-import Topbar from './Components/Topbar/Topbar';
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -16,6 +14,15 @@ export default function App() {
   useEffect(() => {
     setIsLoggedIn(window.localStorage.getItem("loggedIn"));
   }, []);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // useEffect(() => {
+  //   async function checkLoggedIn() {
+  //     const loggedIn = await AsyncStorage.getItem('loggedIn');
+  //     setIsLoggedIn(loggedIn === 'true');
+  //   }
+  //   checkLoggedIn();
+  // }, []);
   return (
        <NavigationContainer>
       <Stack.Navigator>
@@ -29,7 +36,7 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
+const Styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',

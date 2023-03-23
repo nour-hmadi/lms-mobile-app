@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import { Alert } from "react-native";
 
-const styles = StyleSheet.create({
+const Styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function AttendanceScreen() {
+export default function RecordAttendance() {
   const [formData, setFormData] = useState({
     student_id: "",
     teacher_id: "", // add a default value for teacher_id
@@ -71,6 +71,7 @@ export default function AttendanceScreen() {
   const logout = () => {
     window.localStorage.clear();
     window.location.reload(true);
+    alert("Logged out successfuly!");
   };
 
   const createAttendance = (event) => {
@@ -92,33 +93,9 @@ export default function AttendanceScreen() {
           return status < 500; // Reject only if the status code is greater than or equal to 500
         },
       })
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       // ToastAndroid.show('Attendance recorded successfully!', ToastAndroid.SHORT);
-  //       // showMessage({
-  //       //   message: "Attendance recorded successfully!",
-  //       //   type: "success",
-  //       //   duration: 3000,
-  //       // });
-
-  //       setFormData({
-  //         student_id: "",
-  //         teacher_id: "",
-  //         class_section_id: "",
-  //         status: "",
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //       // ToastAndroid.show('Error: ' + error, ToastAndroid.SHORT);
-  //       showMessage({
-  //         message: "Error: " + error,
-  //         type: "danger",
-  //         duration: 3000,
-  //       });
-  //     });
-  // };
   .then((response) => {
+    alert("Attendance recorded successfully!");
+
     console.log(response.data);
     Alert.alert(
       "Attendance recorded successfully!",
@@ -163,7 +140,7 @@ export default function AttendanceScreen() {
       })
       .catch((error) => {
         console.error(error);
-        alert("Failed to fetch user IDs.");
+        // alert("Failed to fetch user IDs.");
       });
   };
   const handleStatusChange = (itemValue) => {
@@ -213,8 +190,8 @@ export default function AttendanceScreen() {
           <Text style={{ color: "red" }}>{errors.class_section_id}</Text>
         )}
       </View>
-      <View style={styles.container}>
-        <Text style={styles.label}>Status</Text>
+      <View style={Styles.container}>
+        <Text style={Styles.label}>Status</Text>
       </View>
       <View>
         <Picker
@@ -224,8 +201,8 @@ export default function AttendanceScreen() {
             handleStatusChange(itemValue);
           }}
           mode="dropdown"
-          style={styles.dropdown}
-          itemStyle={styles.item}
+          style={Styles.dropdown}
+          itemStyle={Styles.item}
         >
           <Picker.Item label="Present" value={1} />
           <Picker.Item label="Late" value={2} />
@@ -234,7 +211,7 @@ export default function AttendanceScreen() {
         <View>
   <View>
     {Boolean(errors.status) && (
-      <Text style={styles.error}>{errors.status}</Text>
+      <Text style={Styles.error}>{errors.status}</Text>
     )}
   </View>
 </View>
@@ -243,7 +220,7 @@ export default function AttendanceScreen() {
       </View>
       <View>
         <Button
-          style={styles.button}
+          style={Styles.button}
           title="Record Attendance"
           onPress={createAttendance}
         />

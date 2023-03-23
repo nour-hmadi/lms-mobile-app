@@ -1,11 +1,12 @@
 import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 // import { ToastAndroid } from 'react-native';
-import { showMessage } from "react-native-flash-message";
+// import { showMessage } from "react-native-flash-message";
 import { Avatar } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { ThemeProvider } from '@mui/material/styles';
 import { createTheme } from '@mui/material';
 import React, { useState, useEffect } from "react";
+import { Alert } from "react-native";
 
 const theme = createTheme();
 
@@ -18,12 +19,14 @@ export default function Login() {
     if (!email || !password) {
       // toast.error('Please enter your email and password', { autoClose: 2000 });
       // ToastAndroid.show('Please enter your email and password', ToastAndroid.SHORT);
-      showMessage({
-        message: 'Please enter your email and password',
-        type: "danger",
-        duration: 3000,
+      // showMessage({
+      //   message: 'Please enter your email and password',
+      //   type: "danger",
+      //   duration: 3000,
+      // });
+      Alert.alert("Error", "Failed to login.", [{ text: "OK" }], {
+        cancelable: false,
       });
-
       return;
     }
     console.log(email, password);
@@ -44,12 +47,17 @@ export default function Login() {
       .then((data) => {
         if (data.token) {
           // toast.success('Logged in', { autoClose: 2000 });
-          showMessage({
-            message: 'Logged in',
-            type: "success",
-            duration: 3000,
-          });
+          // showMessage({
+          //   message: 'Logged in',
+          //   type: "success",
+          //   duration: 3000,
+          // });
           // ToastAndroid.show('Logged in', ToastAndroid.SHORT);
+
+          // Alert.alert("success", "Logged in!", [{ text: "OK" }], {  
+          //       cancelable: false,
+          // });
+        alert("Logged in");
 
           console.log(data, 'Logged in');
           window.localStorage.setItem('token', data.token);
@@ -59,12 +67,14 @@ export default function Login() {
                 } else {
           // toast.error('Invalid email or password', { autoClose: 2000 });
           // ToastAndroid.show('Invalid email or password', ToastAndroid.SHORT);
-          showMessage({
-            message: 'Invalid email or password',
-            type: "danger",
-            duration: 3000,
-          });
-
+          // showMessage({
+          //   message: 'Invalid email or password',
+          //   type: "danger",
+          //   duration: 3000,
+          // });
+          Alert.alert("Error", 'Invalid email or password', [{ text: "OK" }], {  
+            cancelable: false,
+      });
         }
       })
       .catch((error) => {
@@ -72,27 +82,30 @@ export default function Login() {
         //   autoClose: 2000,
         // });
         // ToastAndroid.show('An error occurred. Please try again later.', ToastAndroid.SHORT);
-        showMessage({
-          message: 'An error occurred. Please try again later.',
-          type: "danger",
-          duration: 3000,
-        });
+        // showMessage({
+        //   message: 'An error occurred. Please try again later.',
+        //   type: "danger",
+        //   duration: 3000,
+        // });
+        Alert.alert("Error",'An error occurred. Please try again later.', [{ text: "OK" }], {  
+          cancelable: false,
+    });
         console.error('Error:', error);
       });
   }
 
   return (
      <ThemeProvider theme={theme}>
-       <View style={styles.container}>
-         <View style={styles.avatar}>
+       <View style={Styles.container}>
+         <View style={Styles.avatar}>
            <Avatar sx={{ bgcolor: 'secondary.main' }}>
              <LockOutlinedIcon />
            </Avatar>
-           <Text style={styles.title}>Sign in</Text>
+           <Text style={Styles.title}>Sign in</Text>
          </View>
-         <View style={styles.form}>
+         <View style={Styles.form}>
            <TextInput
-            style={styles.input}
+            style={Styles.input}
             placeholder="Email Address"
             onChangeText={(text) => setEmail(text)}
             value={email}
@@ -101,7 +114,7 @@ export default function Login() {
             autoCorrect={false}
           />
           <TextInput
-            style={styles.input}
+            style={Styles.input}
             placeholder="Password"
             onChangeText={(text) => setPassword(text)}
             value={password}
@@ -112,7 +125,7 @@ export default function Login() {
           </View>
 <View>
           <Button
-            style={styles.button}
+            style={Styles.button}
             title="Sign In"
             onPress={handleSubmit}
           />
@@ -122,7 +135,7 @@ export default function Login() {
   );
 }
 
-const styles = StyleSheet.create({
+const Styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
