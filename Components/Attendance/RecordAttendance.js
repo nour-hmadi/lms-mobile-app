@@ -9,6 +9,9 @@ import {
 } from "react-native";
 import axios from "axios";
 import { Alert } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import Reports from '../Reports/Reports';
+
 
 const Styles = StyleSheet.create({
   container: {
@@ -143,6 +146,12 @@ export default function RecordAttendance() {
         // alert("Failed to fetch user IDs.");
       });
   };
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate('Reports');
+  };
+
   const handleStatusChange = (itemValue) => {
     setSelectedStatus(itemValue);
     setFormData({ ...formData, status: itemValue });
@@ -153,8 +162,9 @@ export default function RecordAttendance() {
 
   return (
     <View style={{ margin: 15 }}>
-      <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-        <Button onPress={logout} title="Logout" />
+      <View style={{ flexDirection: "row", justifyContent: "space-between"  ,marginBottom: 10 }}>
+      <Button  title="Get Report" onPress={handlePress} style={{ fontSize: 12, marginLeft: 10 }}  />
+      <Button onPress={logout} title="Logout" style={{ fontSize: 12, marginRight: 10 }} />
       </View>
 
       <View style={{ marginBottom: 10 }}>
@@ -193,7 +203,7 @@ export default function RecordAttendance() {
       <View style={Styles.container}>
         <Text style={Styles.label}>Status</Text>
       </View>
-      <View>
+      <View style={{ marginBottom: 15 }}>
         <Picker
           selectedValue={selectedStatus}
           onValueChange={(itemValue, itemIndex) => {

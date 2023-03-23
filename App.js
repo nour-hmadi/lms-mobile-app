@@ -4,6 +4,8 @@ import Login from './Components/Login/Login'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState, useEffect } from "react";
+import Reports from './Components/Reports/Reports';
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -16,15 +18,19 @@ export default function App() {
   }, []);
 
   return (
-       <NavigationContainer>
-      <Stack.Navigator>
-        {isLoggedIn ? (
-          <Stack.Screen name="RecordAttendance" component={RecordAttendance} />
-        ) : (
-          <Stack.Screen name="Login" component={Login} />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>   
+<NavigationContainer>
+  <Stack.Navigator>
+    {isLoggedIn ? (
+      <>
+        <Stack.Screen name="RecordAttendance" component={RecordAttendance} />
+        <Stack.Screen name="Reports" component={Reports} />
+      </>
+    ) : (
+      <Stack.Screen name="Login" component={Login} />
+    )}
+  </Stack.Navigator>
+</NavigationContainer>
+
   );
 }
 
