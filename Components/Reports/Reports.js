@@ -27,7 +27,7 @@ export default function Reports() {
   const [alldata, setAllData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   
 
   const attendanceURL = "http://localhost:8000/api/attendances";
